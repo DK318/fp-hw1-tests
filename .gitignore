@@ -3,3 +3,4 @@
 .vscode/
 .hlint.yaml
 .stylish-haskell.yaml
+stack.yaml.lock
