@@ -1,0 +1,5 @@
+.stack-work/
+.history/
+.vscode/
+.hlint.yaml
+.stylish-haskell.yaml
