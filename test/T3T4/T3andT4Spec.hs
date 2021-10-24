@@ -68,11 +68,25 @@ propertyTFromList = testProperty "tree tFromList" prop_tFromList
 
 -- ADVANCED --
 
+tlsize :: Tree a -> Int
+tlsize Leaf             = 0
+tlsize (Branch _ l _ _) = tsize l
+
+trsize :: Tree a -> Int
+trsize Leaf             = 0
+trsize (Branch _ _ _ r) = tsize r
+
+
 isBalanced :: Tree a -> Bool
 isBalanced Leaf = True
 isBalanced (Branch _ l _ r)
-    | abs (tdepth l - tdepth r) <= 1 = isBalanced l && isBalanced r
+    | abs (tdepth l - tdepth r) <= 1 = bothBalanced
+    | tsize l >= tlsize r && tsize l >= trsize r
+        && tsize r >= tlsize l && tsize r >= trsize l
+        = bothBalanced
     | otherwise                      = False
+    where
+        bothBalanced = isBalanced l && isBalanced r
 
 prop_balanced :: Property
 prop_balanced = property $ do
