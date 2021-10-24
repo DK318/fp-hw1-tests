@@ -1,7 +1,7 @@
 name:                hw1
 version:             0.1.0.0
 github:              "DK318/fp-hw1-tests"
-license:             BSD3
+license:             GPL-3
 author:              "Leonid Vasilev && Gleb Pushkarev"
 maintainer:          "vasiklenka@gmail.com or gleb.pushkarev@gmail.com"
 copyright:           "2021 Leonid Vasilev && Gleb Pushkarev"
