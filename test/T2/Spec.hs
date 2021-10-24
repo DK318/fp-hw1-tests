@@ -7,4 +7,4 @@ import T2SpecAdvanced
 
 
 main :: IO ()
-main = defaultMain (testGroup "HW1.T3 and HW1.T4" [tests, advancedTests])
+main = defaultMain (testGroup "HW1.T2" [tests, advancedTests])

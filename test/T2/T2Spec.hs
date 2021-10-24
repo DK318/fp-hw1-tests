@@ -88,7 +88,7 @@ propertyNToNum = testProperty "nToNum property" prop_nToNum
 
 
 tests :: TestTree
-tests = testGroup "HW1.T2"
+tests = testGroup "Basic"
     [
         propertyNplus, propertyNmult, propertyNsub,
         propertyNcmp, propertyNFromNatural, propertyNToNum
