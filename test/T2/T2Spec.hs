@@ -9,7 +9,8 @@ import Test.Tasty.Hedgehog
 import Test.Tasty.Hspec
 
 import GHC.Natural (Natural)
-import HW1.T2 (N (..), nEven, nFromNatural, nOdd, nToNum, ncmp, ndiv, nmod, nmult, nplus, nsub)
+
+import HW1.T2 (N (..), nFromNatural, nToNum, ncmp, nmult, nplus, nsub)
 
 nFromNatural' :: Natural -> N
 nFromNatural' 0 = Z
@@ -85,56 +86,10 @@ prop_nToNum = property $ do
 propertyNToNum :: TestTree
 propertyNToNum = testProperty "nToNum property" prop_nToNum
 
--- ADVANCED --
 
-prop_nEven :: Property
-prop_nEven = property $ do
-    n <- forAll genNatural
-    let nn = nFromNatural' n
-    nEven nn === even n
-
-propertyNEven :: TestTree
-propertyNEven = testProperty "nEven property" prop_nEven
-
-prop_nOdd :: Property
-prop_nOdd = property $ do
-    n <- forAll genNatural
-    let nn = nFromNatural' n
-    nOdd nn === odd n
-
-propertyNOdd :: TestTree
-propertyNOdd = testProperty "nOdd property" prop_nOdd
-
-prop_ndiv :: Property
-prop_ndiv = property $ do
-    a <- forAll genNatural
-    b <- forAll genNatural
-    if b == 0 then discard
-    else do
-        let an = nFromNatural' a
-            bn = nFromNatural' b
-        nToNum' (ndiv an bn) === a `div` b
-
-propertyNDiv :: TestTree
-propertyNDiv = testProperty "nDiv property" prop_ndiv
-
-prop_nmod :: Property
-prop_nmod = property $ do
-    a <- forAll genNatural
-    b <- forAll genNatural
-    if b == 0 then discard
-    else do
-        let an = nFromNatural' a
-            bn = nFromNatural' b
-        nToNum' (nmod an bn) === a `mod` b
-
-propertyNMod :: TestTree
-propertyNMod = testProperty "nMod property" prop_nmod
-
-tests :: IO TestTree
-tests = return $ testGroup "HW1.T2"
+tests :: TestTree
+tests = testGroup "HW1.T2"
     [
         propertyNplus, propertyNmult, propertyNsub,
-        propertyNcmp, propertyNFromNatural, propertyNToNum,
-        propertyNEven, propertyNOdd, propertyNDiv, propertyNMod
+        propertyNcmp, propertyNFromNatural, propertyNToNum
     ]

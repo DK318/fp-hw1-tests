@@ -66,6 +66,13 @@ prop_tFromList = property $ do
 propertyTFromList :: TestTree
 propertyTFromList = testProperty "tree tFromList" prop_tFromList
 
+
+tests :: TestTree
+tests = testGroup "Basic"
+    [
+        propertySize, propertySorted, propertyUnique, propertyTFromList
+    ]
+
 -- ADVANCED --
 
 isBalanced :: Tree a -> Bool
@@ -83,8 +90,9 @@ prop_balanced = property $ do
 propertyBalanced :: TestTree
 propertyBalanced = testProperty "tree balanced" prop_balanced
 
-tests :: IO TestTree
-tests = return $ testGroup "HW1.T3 and HW1.T4"
+
+advancedTests :: TestTree
+advancedTests = testGroup "Advanced"
     [
-        propertySize, propertySorted, propertyUnique, propertyTFromList, propertyBalanced
-    ]
+        propertyBalanced
+    ]    

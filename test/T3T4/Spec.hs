@@ -1,6 +1,9 @@
-import T3andT4Spec ( tests )
+import T3andT4Spec (advancedTests, tests)
 
-import Test.Tasty ( defaultMain )
+import Test.Tasty (defaultMain, testGroup)
+import Test.Tasty.Providers
+import System.Environment
 
 main :: IO ()
-main = tests >>= \test -> defaultMain test
+main = defaultMain (testGroup "HW1.T3 and HW1.T4" [tests, advancedTests])
+    

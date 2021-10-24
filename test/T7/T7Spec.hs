@@ -17,6 +17,19 @@ instance Eq a => Eq (ListPlus a) where
         | otherwise = False
     (==) _ _ = False
 
+
+
+instance Eq DotString where
+    (DS a) == (DS b) = a == b
+
+
+instance (Eq a, Eq b) => Eq (Inclusive a b) where
+    (This a) == (This b)       = a == b
+    (That a) == (That b)       = a == b
+    (Both a b) == (Both a' b') = a == a' && b == b'
+    (==) _ _                   = False
+
+
 listPlusFromList :: [a] -> ListPlus a
 listPlusFromList [x]    = Last x
 listPlusFromList (x:xs) = x :+ listPlusFromList xs
@@ -37,13 +50,6 @@ prop_listPlus = property $ do
 
 propertyListPlus :: IO TestTree
 propertyListPlus = return $ testProperty "ListPlus property" prop_listPlus
-
-instance (Eq a, Eq b) => Eq (Inclusive a b) where
-    (This a) == (This b)       = a == b
-    (That a) == (That b)       = a == b
-    (Both a b) == (Both a' b') = a == a' && b == b'
-    (==) _ _                   = False
-
 
 genString :: Gen String
 genString = Gen.string (Range.linear 1 100) Gen.alphaNum
@@ -73,9 +79,6 @@ prop_inclusive = property $ do
 
 propertyInclusive :: IO TestTree
 propertyInclusive = return $ testProperty "Inclusive property" prop_inclusive
-
-instance Eq DotString where
-    (DS a) == (DS b) = a == b
 
 genDotString :: Gen DotString
 genDotString = do

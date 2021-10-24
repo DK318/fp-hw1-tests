@@ -9,8 +9,7 @@ import Test.Tasty.Hedgehog
 import Test.Tasty.Hspec
 
 import GHC.Natural (Natural)
-import HW1.T1 (Day (Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday), afterDays,
-               daysToParty, isWeekend, nextDay)
+import HW1.T1 (Day (..), afterDays, daysToParty, isWeekend, nextDay)
 
 
 instance Eq Day where

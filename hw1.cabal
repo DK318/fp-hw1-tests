@@ -77,6 +77,7 @@ test-suite hw1-t2-test
   main-is: Spec.hs
   other-modules:
       T2Spec
+      T2SpecAdvanced
       Paths_hw1
   hs-source-dirs:
       test/T2
