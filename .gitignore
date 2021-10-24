@@ -1,6 +1,14 @@
+
+# Some work files
 .stack-work/
 .history/
-.vscode/
+stack.yaml.lock
+
+# Style configuration
 .hlint.yaml
 .stylish-haskell.yaml
-stack.yaml.lock
+
+# IDE
+.vscode/
+.idea/
+fp-hw1-tests.iml
