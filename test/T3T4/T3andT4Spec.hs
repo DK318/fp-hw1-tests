@@ -9,8 +9,8 @@ import Test.Tasty
 import Test.Tasty.Hedgehog
 import Test.Tasty.Hspec
 
-import HW1.T3
-import HW1.T4
+import HW1.T3 (Tree (..), tFromList, tdepth, tinsert, tmember, tsize)
+import HW1.T4 (tfoldr)
 
 sorted :: Ord a => [a] -> Bool
 sorted []  = True
@@ -39,7 +39,7 @@ prop_size = property $ do
         set  = Set.fromList xs
     tsize tree === Set.size set
 
-propertySize :: TestTree 
+propertySize :: TestTree
 propertySize = testProperty "tree size" prop_size
 
 prop_sorted :: Property
@@ -47,7 +47,7 @@ prop_sorted = property $ do
     xs <- forAll genList
     assert $ sorted ((treeToList . tFromList) xs)
 
-propertySorted :: TestTree 
+propertySorted :: TestTree
 propertySorted = testProperty "tree sorted" prop_sorted
 
 prop_unique :: Property

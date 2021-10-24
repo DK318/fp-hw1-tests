@@ -1,10 +1,10 @@
 name:                hw1
 version:             0.1.0.0
-github:              "githubuser/hw1"
+github:              "DK318/fp-hw1-tests"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2021 Author name here"
+author:              "Leonid Vasilev && Gleb Pushkarev"
+maintainer:          "vasiklenka@gmail.com or gleb.pushkarev@gmail.com"
+copyright:           "2021 Leonid Vasilev && Gleb Pushkarev"
 
 extra-source-files:
 - README.md
@@ -17,7 +17,8 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/hw1#readme>
+description:         Please see the README on GitHub at <https://github.com/DK318/fp-hw1-tests/blob/master/README.md>
+homepage:       https://github.com/DK318/fp-hw1-tests/blob/master/README.md
 
 dependencies:
 - base >= 4.7 && < 5

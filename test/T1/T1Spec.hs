@@ -9,7 +9,19 @@ import Test.Tasty.Hedgehog
 import Test.Tasty.Hspec
 
 import GHC.Natural (Natural)
-import HW1.T1 (Day (..), afterDays, daysToParty, isWeekend, nextDay)
+import HW1.T1 (Day (Friday, Monday, Saturday, Sunday, Thursday, Tuesday, Wednesday), afterDays,
+               daysToParty, isWeekend, nextDay)
+
+
+instance Eq Day where
+    (==) Monday Monday       = True
+    (==) Tuesday Tuesday     = True
+    (==) Wednesday Wednesday = True
+    (==) Thursday Thursday   = True
+    (==) Friday Friday       = True
+    (==) Saturday Saturday   = True
+    (==) Sunday Sunday       = True
+    (==)  _ _                = False
 
 instance Enum Day where
   toEnum 0 = Monday
@@ -34,7 +46,7 @@ instance Bounded Day where
   maxBound = Sunday
 
 afterDaysHelper :: Natural -> Day -> Day
-afterDaysHelper n d = toEnum $ (fromIntegral n) + (fromEnum d)
+afterDaysHelper n d = toEnum $ fromIntegral n + fromEnum d
 
 spec_Days :: Spec
 spec_Days = do

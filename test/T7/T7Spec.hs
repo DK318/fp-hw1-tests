@@ -8,7 +8,7 @@ import Test.Tasty
 import Test.Tasty.Hedgehog
 import Test.Tasty.Hspec
 
-import HW1.T7
+import HW1.T7 (DotString (..), Fun (..), Inclusive (..), ListPlus (..))
 
 instance Eq a => Eq (ListPlus a) where
     (Last x) == (Last y) = x == y
@@ -39,34 +39,27 @@ propertyListPlus :: IO TestTree
 propertyListPlus = return $ testProperty "ListPlus property" prop_listPlus
 
 instance (Eq a, Eq b) => Eq (Inclusive a b) where
-    (This a) == (This b) = a == b
-    (That a) == (That b) = a == b
+    (This a) == (This b)       = a == b
+    (That a) == (That b)       = a == b
     (Both a b) == (Both a' b') = a == a' && b == b'
-    (==) _ _ = False
+    (==) _ _                   = False
 
-instance (Show a, Show b) => Show (Inclusive a b) where
-    show (This a) = "This " ++ show a
-    show (That a) = "That " ++ show a
-    show (Both a b) = "Both " ++ show a ++ " " ++ show b
 
 genString :: Gen String
 genString = Gen.string (Range.linear 1 100) Gen.alphaNum
 
 genThis :: Gen (Inclusive String String)
 genThis = do
-    str <- genString
-    return $ This str
+    This <$> genString
 
 genThat :: Gen (Inclusive String String)
 genThat = do
-    str <- genString
-    return $ That str
+    That <$> genString
 
 genBoth :: Gen (Inclusive String String)
 genBoth = do
     str1 <- genString
-    str2 <- genString
-    return $ Both str1 str2
+    Both str1 <$> genString
 
 genInclusive :: Gen (Inclusive String String)
 genInclusive = Gen.choice [genThis, genThat, genBoth]
@@ -86,8 +79,7 @@ instance Eq DotString where
 
 genDotString :: Gen DotString
 genDotString = do
-    str <- genString
-    return $ DS str
+    DS <$> genString
 
 spec_DotString :: Spec
 spec_DotString = do
@@ -133,7 +125,7 @@ div3 :: Fun Int
 div3 = F $ \a -> a `div` 3
 
 apply :: Fun a -> a -> a
-apply (F f) a = f a
+apply (F f) = f
 
 spec_Fun :: Spec
 spec_Fun = do

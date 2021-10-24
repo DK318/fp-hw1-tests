@@ -10,14 +10,15 @@ import Test.Tasty.Hedgehog
 import Test.Tasty.Hspec
 import Data.Monoid
 
-import HW1.T6
 import Data.Foldable
+
+import HW1.T6 ( epart, mcat )
 
 spec_mcat :: Spec
 spec_mcat = do
     describe "Statement tests" $ do
         it "Statement test 1" $ mcat [Just "mo", Nothing, Nothing, Just "no", Just "id"] `shouldBe` "monoid"
-        it "Statement test 2" $ (Data.Monoid.getSum $ mcat [Nothing, Just 2, Nothing, Just 40]) `shouldBe` 42
+        it "Statement test 2" $ Data.Monoid.getSum (mcat [Nothing, Just 2, Nothing, Just 40]) `shouldBe` 42
 
 hspecMcat :: IO TestTree
 hspecMcat = testSpec "mcat tests" spec_mcat

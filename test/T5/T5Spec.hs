@@ -9,7 +9,7 @@ import Test.Tasty
 import Test.Tasty.Hedgehog
 import Test.Tasty.Hspec
 
-import HW1.T5
+import HW1.T5 ( joinWith, splitOn )
 
 spec_splitOn :: Spec
 spec_splitOn = do

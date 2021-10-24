@@ -9,7 +9,7 @@ import Test.Tasty.Hedgehog
 import Test.Tasty.Hspec
 
 import GHC.Natural (Natural)
-import HW1.T2
+import HW1.T2 (N (..), nEven, nFromNatural, nOdd, nToNum, ncmp, ndiv, nmod, nmult, nplus, nsub)
 
 nFromNatural' :: Natural -> N
 nFromNatural' 0 = Z
@@ -28,7 +28,7 @@ prop_nplus = property $ do
     b <- forAll genNatural
     let an = nFromNatural' a
         bn = nFromNatural' b
-    (nToNum' $ nplus an bn) === a + b
+    nToNum' (nplus an bn) === a + b
 
 propertyNplus :: TestTree
 propertyNplus = testProperty "nplus property" prop_nplus
@@ -39,7 +39,7 @@ prop_nmult = property $ do
     b <- forAll genNatural
     let an = nFromNatural' a
         bn = nFromNatural' b
-    (nToNum' $ nmult an bn) === a * b
+    nToNum' (nmult an bn) === a * b
 
 propertyNmult :: TestTree
 propertyNmult = testProperty "nmult property" prop_nmult
@@ -71,7 +71,7 @@ propertyNcmp = testProperty "ncmp property" prop_ncmp
 prop_nFromNatural :: Property
 prop_nFromNatural = property $ do
     n <- forAll genNatural
-    (nToNum' $ nFromNatural n) === n
+    nToNum' (nFromNatural n) === n
 
 propertyNFromNatural :: TestTree
 propertyNFromNatural = testProperty "nFromNatural property" prop_nFromNatural
@@ -113,7 +113,7 @@ prop_ndiv = property $ do
     else do
         let an = nFromNatural' a
             bn = nFromNatural' b
-        (nToNum' $ ndiv an bn) === a `div` b
+        nToNum' (ndiv an bn) === a `div` b
 
 propertyNDiv :: TestTree
 propertyNDiv = testProperty "nDiv property" prop_ndiv
@@ -126,7 +126,7 @@ prop_nmod = property $ do
     else do
         let an = nFromNatural' a
             bn = nFromNatural' b
-        (nToNum' $ nmod an bn) === a `mod` b
+        nToNum' (nmod an bn) === a `mod` b
 
 propertyNMod :: TestTree
 propertyNMod = testProperty "nMod property" prop_nmod
