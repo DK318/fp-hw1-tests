@@ -75,17 +75,34 @@ tests = testGroup "Basic"
 
 -- ADVANCED --
 
-isBalanced :: Tree a -> Bool
-isBalanced Leaf = True
-isBalanced (Branch _ l _ r)
-    | abs (tdepth l - tdepth r) <= 1 = isBalanced l && isBalanced r
+tlsize :: Tree a -> Int
+tlsize Leaf             = 0
+tlsize (Branch _ l _ _) = tsize l
+
+trsize :: Tree a -> Int
+trsize Leaf             = 0
+trsize (Branch _ _ _ r) = tsize r
+
+
+isBalancedDepth :: Tree a -> Bool
+isBalancedDepth Leaf = True
+isBalancedDepth (Branch _ l _ r)
+    | abs (tdepth l - tdepth r) <= 1 = isBalancedDepth l && isBalancedDepth r
     | otherwise                      = False
+
+isBalancedSize :: Tree a -> Bool
+isBalancedSize Leaf = True
+isBalancedSize (Branch _ l _ r)
+    | tsize l >= tlsize r && tsize l >= trsize r &&
+      tsize r >= tlsize l && tsize r >= trsize l
+                = isBalancedSize l && isBalancedSize r
+    | otherwise = False
 
 prop_balanced :: Property
 prop_balanced = property $ do
     xs <- forAll genList
     let tree = tFromList xs
-    assert $ isBalanced tree
+    assert $ isBalancedDepth tree || isBalancedSize tree
 
 propertyBalanced :: TestTree
 propertyBalanced = testProperty "tree balanced" prop_balanced
